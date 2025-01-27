@@ -1,0 +1,36 @@
+@startuml
+start
+
+:Mount Component;
+:Initialize Variables:
+- start_date = today() - 30 days
+- end_date = today()
+- customer_id = ''
+- sale_status = ''
+- payment_status = '';
+
+if (Generate Report Button Clicked?) then (Yes)
+  :Validate Input:
+  - Check if start_date is before end_date;
+
+  if (Validation Passed?) then (Yes)
+    :Fetch Sales Data:
+    - Filter by date range (start_date to end_date)
+    - Filter by customer_id (if provided)
+    - Filter by sale_status (if provided)
+    - Filter by payment_status (if provided)
+    - Order by date (descending)
+    - Paginate results (10 per page);
+
+    :Render Sales Report View;
+  else (No)
+    :Show Validation Errors;
+  endif
+else (No)
+  :Wait for User Input;
+endif
+
+:Display Sales Report;
+
+stop
+@enduml
